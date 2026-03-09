@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ryan Tran — Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0f0f0f;
+    --white: #fafaf8;
+    --gray: #6b6b6b;
+    --light-gray: #f0efec;
+    --accent: #1a56a0;
+    --accent-light: #e8f0fb;
+    --border: #e2e0db;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--black);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--black); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: 0; right: 0;
+    width: 55%;
+    height: 100%;
+    background: var(--light-gray);
+    clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--black);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.25s;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--gray);
+    font-weight: 300;
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.4s;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.55s;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 14px 32px;
+    background: var(--black);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-block;
+    padding: 14px 32px;
+    border: 1px solid var(--border);
+    color: var(--black);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 400;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--black); transform: translateY(-1px); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--gray);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.8s;
+  }
+
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--gray);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 100px 60px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+
+  .section-num {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    margin-left: 20px;
+  }
+
+  /* ABOUT */
+  #about {
+    background: var(--light-gray);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 1.05rem;
+    color: var(--gray);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .about-text p strong {
+    color: var(--black);
+    font-weight: 500;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .stat-box {
+    padding: 28px;
+    background: var(--white);
+    border: 1px solid var(--border);
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    color: var(--black);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 48px;
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 0;
+    background: var(--accent);
+    transition: height 0.3s ease;
+  }
+
+  .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .project-card:hover::before { height: 100%; }
+
+  .project-card.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .project-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .project-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .project-desc {
+    font-size: 0.925rem;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .stack-tag {
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    background: var(--light-gray);
+    color: var(--gray);
+    letter-spacing: 0.04em;
+  }
+
+  .project-highlights {
+    list-style: none;
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+  }
+
+  .project-highlights li {
+    font-size: 0.875rem;
+    color: var(--gray);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    padding-left: 16px;
+    position: relative;
+    font-weight: 300;
+  }
+
+  .project-highlights li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+
+  .business-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+  }
+
+  .business-badge::before {
+    content: '●';
+    font-size: 0.5rem;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* SKILLS */
+  #skills { background: var(--light-gray); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .skill-group {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 32px;
+  }
+
+  .skill-group-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .skill-list li {
+    font-size: 0.9rem;
+    color: var(--black);
+    font-weight: 400;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .contact-text em { font-style: italic; color: var(--accent); }
+
+  .contact-sub {
+    font-size: 1rem;
+    color: var(--gray);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--black);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+
+  .contact-link-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray);
+    margin-bottom: 4px;
+  }
+
+  .contact-link-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .contact-arrow {
+    font-size: 1.2rem;
+    color: var(--accent);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 60px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: var(--gray);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    section { padding: 80px 24px; }
+    #hero { padding: 100px 24px 60px; }
+    .hero-scroll { left: 24px; }
+    .about-grid, .contact-grid, .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-template-columns: 1fr; gap: 32px; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .hero-bg { width: 100%; clip-path: none; opacity: 0.3; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Ryan Tran</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Software Engineer · Cal Poly SLO '27</span>
+    <h1 class="hero-name">Ryan<br><em>Tran.</em></h1>
+    <p class="hero-desc">Full-stack developer building AI-powered products and real businesses. From lead generation SaaS to poker analytics platforms — I ship things that work.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-secondary">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-line"></span>
+    Scroll to explore
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header fade-in">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>I'm a <strong>Software Engineering student at Cal Poly SLO</strong> with a passion for building products that solve real problems. I don't just write code — I build businesses.</p>
+      <p>My strongest work lives at the intersection of <strong>AI and full-stack development</strong>. I've integrated the Anthropic Claude API, Google Places API, and Supabase into production applications that are live and generating revenue.</p>
+      <p>When I'm not coding, I'm thinking about how to make technology more useful for real people — whether that's a local business owner who needs a website, or a poker player who wants to track their game.</p>
+    </div>
+    <div class="about-stats fade-in">
+      <div class="stat-box">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Shipped Projects</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">3.1</div>
+        <div class="stat-label">GPA · Dean's List</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">$1K</div>
+        <div class="stat-label">SaaS Setup Revenue</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">'27</div>
+        <div class="stat-label">Cal Poly Graduation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header fade-in">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- SiteLeads Featured -->
+    <div class="project-card featured fade-in">
+      <div>
+        <div class="business-badge">Live Business</div>
+        <span class="project-tag">AI · SaaS · Full-Stack</span>
+        <h3 class="project-name">SiteLeads</h3>
+        <p class="project-desc">An AI-powered web design SaaS that automates local business lead generation and website creation. Built, launched, and running with a real cold calling sales team.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Next.js</span>
+          <span class="stack-tag">TypeScript</span>
+          <span class="stack-tag">Claude API</span>
+          <span class="stack-tag">Google Places API</span>
+          <span class="stack-tag">Supabase</span>
+          <span class="stack-tag">Vercel</span>
+        </div>
+      </div>
+      <ul class="project-highlights">
+        <li>Lead gen engine using Google Places API to find businesses without websites</li>
+        <li>Claude API integration generating custom website copy in seconds</li>
+        <li>AI site builder producing complete mobile-responsive HTML sites</li>
+        <li>Full outreach CRM with email, SMS, and call script generation</li>
+        <li>Launched at $500–$1,000 setup + $50–$100/mo recurring pricing</li>
+      </ul>
+    </div>
+
+    <!-- PureArt -->
+    <div class="project-card fade-in">
+      <span class="project-tag">Analytics · Full-Stack</span>
+      <h3 class="project-name">PureArt</h3>
+      <p class="project-desc">A full-stack poker session tracking and analytics platform with real-time game tracking, custom algorithms, and a GTO training module.</p>
+      <div class="project-stack">
+        <span class="stack-tag">React</span>
+        <span class="stack-tag">Recharts</span>
+        <span class="stack-tag">Supabase</span>
+        <span class="stack-tag">Vercel</span>
+      </div>
+      <ul class="project-highlights">
+        <li>Real-time game tracker with optimal debt settlement algorithm</li>
+        <li>Dashboard with bankroll curve and P&L analytics</li>
+        <li>GTO training module: 22 scenarios, 8 positions, 30+ situations</li>
+        <li>Migrated from localStorage to Supabase with row-level security</li>
+      </ul>
+    </div>
+
+    <!-- Findr -->
+    <div class="project-card fade-in">
+      <span class="project-tag">Maps · Full-Stack</span>
+      <h3 class="project-name">Findr</h3>
+      <p class="project-desc">A local event discovery platform where users find and create events on an interactive map, filtered by interest and date.</p>
+      <div class="project-stack">
+        <span class="stack-tag">React</span>
+        <span class="stack-tag">Node.js</span>
+        <span class="stack-tag">Express</span>
+        <span class="stack-tag">MongoDB</span>
+        <span class="stack-tag">Leaflet.js</span>
+      </div>
+      <ul class="project-highlights">
+        <li>Interactive Leaflet.js map with real-time event pinning</li>
+        <li>Interest and date range filtering</li>
+        <li>RESTful Node.js/Express API with MongoDB Atlas</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header fade-in">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid fade-in">
+    <div class="skill-group">
+      <div class="skill-group-title">Languages</div>
+      <ul class="skill-list">
+        <li>JavaScript</li>
+        <li>TypeScript</li>
+        <li>Python</li>
+        <li>Java</li>
+        <li>HTML / CSS</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Frameworks</div>
+      <ul class="skill-list">
+        <li>React</li>
+        <li>Next.js</li>
+        <li>Node.js</li>
+        <li>Express.js</li>
+        <li>Tailwind CSS</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Cloud & Data</div>
+      <ul class="skill-list">
+        <li>Supabase (PostgreSQL)</li>
+        <li>MongoDB</li>
+        <li>Vercel</li>
+        <li>Netlify</li>
+        <li>GitHub CI/CD</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Concepts</div>
+      <ul class="skill-list">
+        <li>AI Integration</li>
+        <li>REST API Design</li>
+        <li>SaaS Architecture</li>
+        <li>JWT Auth & RLS</li>
+        <li>Algorithm Design</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header fade-in">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Contact</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="fade-in">
+      <h3 class="contact-text">Let's build something <em>great</em> together.</h3>
+      <p class="contact-sub">I'm open to internships, full-time roles, freelance projects, and interesting collaborations. Don't hesitate to reach out.</p>
+      <a href="mailto:rtran602@gmail.com" class="btn-primary">Send an Email</a>
+    </div>
+    <div class="contact-links fade-in">
+      <a href="mailto:rtran602@gmail.com" class="contact-link">
+        <div>
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-value">rtran602@gmail.com</div>
+        </div>
+        <span class="contact-arrow">→</span>
+      </a>
+      <a href="https://linkedin.com/in/ryan-tran-9b0438240" target="_blank" class="contact-link">
+        <div>
+          <div class="contact-link-label">LinkedIn</div>
+          <div class="contact-link-value">linkedin.com/in/ryan-tran-9b0438240</div>
+        </div>
+        <span class="contact-arrow">→</span>
+      </a>
+      <a href="tel:7078125867" class="contact-link">
+        <div>
+          <div class="contact-link-label">Phone</div>
+          <div class="contact-link-value">707-812-5867</div>
+        </div>
+        <span class="contact-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Ryan Tran · Built with care</p>
+  <p>Cal Poly SLO · Software Engineering</p>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 100);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Stagger children
+  document.querySelectorAll('.projects-grid .project-card, .skills-grid .skill-group, .about-stats .stat-box').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.08}s`;
+  });
+</script>
+
+</body>
+</html>
