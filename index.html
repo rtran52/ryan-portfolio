@@ -322,6 +322,21 @@
     margin-bottom: 16px;
   }
 
+  .project-link {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--accent-light);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .project-link:hover { border-color: var(--accent); }
+
   .project-name {
     font-family: 'DM Serif Display', serif;
     font-size: 1.8rem;
@@ -632,6 +647,7 @@
         <div class="business-badge">Live Business</div>
         <span class="project-tag">AI · SaaS · Full-Stack</span>
         <h3 class="project-name">SiteLeads</h3>
+        <a href="https://sitleads-app.vercel.app/" target="_blank" class="project-link">View Live Site →</a>
         <p class="project-desc">An AI-powered web design SaaS that automates local business lead generation and website creation. Built, launched, and running with a real cold calling sales team.</p>
         <div class="project-stack">
           <span class="stack-tag">Next.js</span>
@@ -655,6 +671,7 @@
     <div class="project-card fade-in">
       <span class="project-tag">Analytics · Full-Stack</span>
       <h3 class="project-name">PureArt</h3>
+      <a href="https://pureart.vercel.app/" target="_blank" class="project-link">View Live Site →</a>
       <p class="project-desc">A full-stack poker session tracking and analytics platform with real-time game tracking, custom algorithms, and a GTO training module.</p>
       <div class="project-stack">
         <span class="stack-tag">React</span>
@@ -674,6 +691,7 @@
     <div class="project-card fade-in">
       <span class="project-tag">Maps · Full-Stack</span>
       <h3 class="project-name">Findr</h3>
+      <a href="https://findr.page/" target="_blank" class="project-link">View Live Site →</a>
       <p class="project-desc">A local event discovery platform where users find and create events on an interactive map, filtered by interest and date.</p>
       <div class="project-stack">
         <span class="stack-tag">React</span>
@@ -754,13 +772,13 @@
     <div class="fade-in">
       <h3 class="contact-text">Let's build something <em>great</em> together.</h3>
       <p class="contact-sub">I'm open to internships, full-time roles, freelance projects, and interesting collaborations. Don't hesitate to reach out.</p>
-      <a href="mailto:rtran602@gmail.com" class="btn-primary">Send an Email</a>
+      <a href="/cdn-cgi/l/email-protection#1e6c6a6c7f70282e2c5e79737f7772307d7173" class="btn-primary">Send an Email</a>
     </div>
     <div class="contact-links fade-in">
-      <a href="mailto:rtran602@gmail.com" class="contact-link">
+      <a href="/cdn-cgi/l/email-protection#24565056454a121416644349454d480a474b49" class="contact-link">
         <div>
           <div class="contact-link-label">Email</div>
-          <div class="contact-link-value">rtran602@gmail.com</div>
+          <div class="contact-link-value"><span class="__cf_email__" data-cfemail="65171117040b535557250208040c094b060a08">[email&#160;protected]</span></div>
         </div>
         <span class="contact-arrow">→</span>
       </a>
@@ -787,7 +805,7 @@
   <p>Cal Poly SLO · Software Engineering</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
@@ -799,13 +817,4 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  // Stagger children
-  document.querySelectorAll('.projects-grid .project-card, .skills-grid .skill-group, .about-stats .stat-box').forEach((el, i) => {
-    el.style.transitionDelay = `${i * 0.08}s`;
-  });
-</script>
-
-</body>
-</html>
+  document.querySelectorAll('.
