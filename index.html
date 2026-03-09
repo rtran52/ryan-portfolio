@@ -767,13 +767,12 @@
     <div class="fade-in">
       <h3 class="contact-text">Let's build something <em>great</em> together.</h3>
       <p class="contact-sub">I'm open to internships, full-time roles, freelance projects, and interesting collaborations. Don't hesitate to reach out.</p>
-      <a href="/cdn-cgi/l/email-protection#1e6c6a6c7f70282e2c5e79737f7772307d7173" class="btn-primary">Send an Email</a>
     </div>
     <div class="contact-links fade-in">
-      <a href="/cdn-cgi/l/email-protection#24565056454a121416644349454d480a474b49" class="contact-link">
+      <a href="mailto:rtran602@gmail.com" class="contact-link">
         <div>
           <div class="contact-link-label">Email</div>
-          <div class="contact-link-value"><span class="__cf_email__" data-cfemail="65171117040b535557250208040c094b060a08">[email&#160;protected]</span></div>
+          <div class="contact-link-value">rtran602@gmail.com</div>
         </div>
         <span class="contact-arrow">→</span>
       </a>
@@ -812,7 +811,4 @@
     });
   }, { threshold: 0.1 });
 
-  // Stagger children
-document.querySelectorAll('.projects-grid .project-card, .skills-grid .skill-group, .about-stats .stat-box').forEach((el, i) => {
-  el.style.transitionDelay = `${i * 0.08}s`;
-});
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
