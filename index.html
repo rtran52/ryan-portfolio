@@ -543,14 +543,9 @@
   }
 
   .fade-in {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
 
   /* RESPONSIVE */
@@ -817,4 +812,7 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.
+  // Stagger children
+document.querySelectorAll('.projects-grid .project-card, .skills-grid .skill-group, .about-stats .stat-box').forEach((el, i) => {
+  el.style.transitionDelay = `${i * 0.08}s`;
+});
